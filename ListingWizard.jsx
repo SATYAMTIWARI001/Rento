@@ -238,8 +238,8 @@ export default function ListingWizard({ isOpen, onClose, onSaveListing, initialD
       img: primaryImg,
       primaryImage: primaryImg,
       location: `${formData.area}, ${formData.city}`,
-      owner: initialData?.owner || "Aditya R.",
-      ownerId: initialData?.ownerId || "user_aditya",
+          owner: initialData?.owner || "SATYAM",
+          ownerId: initialData?.ownerId || "user_satyam",
       rating: initialData?.rating || 5.0,
       reviews: initialData?.reviews || 0,
       views: initialData?.views || 0,
@@ -253,7 +253,7 @@ export default function ListingWizard({ isOpen, onClose, onSaveListing, initialD
         {
           date: new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" }),
           action: isEditMode ? "UPDATED" : "SUBMITTED",
-          by: "Aditya R. (Owner)",
+          by: "SATYAM (Owner)",
           note: isEditMode ? "Listing details updated by owner." : "New listing submitted for verification."
         }
       ],

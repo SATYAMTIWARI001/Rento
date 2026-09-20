@@ -103,8 +103,8 @@ export const INITIAL_LISTINGS = [
       "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
     ],
-    owner: "Aditya R.",
-    ownerId: "user_aditya",
+    owner: "SATYAM",
+    ownerId: "user_satyam",
     condition: "Like new",
     brand: "Sony",
     model: "ILCE-7M3",
@@ -134,7 +134,7 @@ export const INITIAL_LISTINGS = [
     status: "PUBLISHED",
     rejectionReason: null,
     approvalHistory: [
-      { date: "2026-09-10 11:30 AM", action: "SUBMITTED", by: "Aditya R." },
+      { date: "2026-09-10 11:30 AM", action: "SUBMITTED", by: "SATYAM" },
       { date: "2026-09-10 01:15 PM", action: "APPROVED", by: "Admin (Siddharth K.)", note: "Verified images and serial info." }
     ],
     blockedDates: ["2026-09-28", "2026-09-29"],
@@ -659,8 +659,8 @@ export const INITIAL_LISTINGS = [
     images: [
       "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?q=80&w=1200&auto=format&fit=crop"
     ],
-    owner: "Aditya R.",
-    ownerId: "user_aditya",
+    owner: "SATYAM",
+    ownerId: "user_satyam",
     condition: "Like new",
     brand: "DJI",
     model: "Mini 4 Pro (RC 2 Screen Remote)",
@@ -690,7 +690,7 @@ export const INITIAL_LISTINGS = [
     status: "PENDING_APPROVAL",
     rejectionReason: null,
     approvalHistory: [
-      { date: "2026-09-15 04:20 PM", action: "SUBMITTED", by: "Aditya R.", note: "New listing submitted for verification." }
+      { date: "2026-09-15 04:20 PM", action: "SUBMITTED", by: "SATYAM", note: "New listing submitted for verification." }
     ],
     blockedDates: [],
     bookings: [],
@@ -720,8 +720,8 @@ export const INITIAL_LISTINGS = [
     images: [
       "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop"
     ],
-    owner: "Aditya R.",
-    ownerId: "user_aditya",
+    owner: "SATYAM",
+    ownerId: "user_satyam",
     condition: "Good",
     brand: "Kodak",
     model: "Vintage Carousel",
@@ -743,7 +743,7 @@ export const INITIAL_LISTINGS = [
     status: "REJECTED",
     rejectionReason: "Image quality is insufficient. Photos must be clear, well-lit, and show all sides of the equipment and power cords.",
     approvalHistory: [
-      { date: "2026-09-14 10:15 AM", action: "SUBMITTED", by: "Aditya R." },
+      { date: "2026-09-14 10:15 AM", action: "SUBMITTED", by: "SATYAM" },
       { date: "2026-09-14 11:45 AM", action: "REJECTED", by: "Admin (Siddharth K.)", note: "Image quality is insufficient. Photos must be clear, well-lit, and show all sides of the equipment and power cords." }
     ],
     blockedDates: [],

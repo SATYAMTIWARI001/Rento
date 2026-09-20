@@ -125,6 +125,21 @@ const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 const isTouchDevice = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
+const migrateDefaultUser = (value) => (Array.isArray(value) ? value.map((item) => {
+  if (item.ownerId === "user_aditya") {
+    return {
+      ...item,
+      owner: "SATYAM",
+      ownerId: "user_satyam",
+      approvalHistory: (item.approvalHistory || []).map((entry) =>
+        entry.by === "Aditya R." ? { ...entry, by: "SATYAM" } : entry
+      )
+    };
+  }
+  if (item.renter === "Aditya R. (You)") return { ...item, renter: "SATYAM (You)" };
+  return item;
+}) : value);
+
 function useTilt(maxDeg = 6) {
   const ref = useRef(null);
   const [style, setStyle] = useState({});
@@ -210,8 +225,8 @@ export default function Rento() {
   const [route, setRoute] = useState({ page: "home" });
 
   // Persistence in LocalStorage
-  const [listings, setListings] = useState(() => loadFromStorage("rento_listings_v1", INITIAL_LISTINGS));
-  const [requests, setRequests] = useState(() => loadFromStorage("rento_requests_v1", INITIAL_REQUESTS));
+  const [listings, setListings] = useState(() => migrateDefaultUser(loadFromStorage("rento_listings_v1", INITIAL_LISTINGS)));
+  const [requests, setRequests] = useState(() => migrateDefaultUser(loadFromStorage("rento_requests_v1", INITIAL_REQUESTS)));
   const [notifications, setNotifications] = useState(() => loadFromStorage("rento_notifs_v1", INITIAL_NOTIFICATIONS));
   const [favorites, setFavorites] = useState(() => new Set(loadFromStorage("rento_favs_v1", [2, 4])));
 
@@ -377,7 +392,7 @@ export default function Rento() {
     const newBookingId = "b_" + Date.now();
     const newBooking = {
       id: newBookingId,
-      renter: "Aditya R. (You)",
+      renter: "SATYAM (You)",
       startDate: bookingData.startDate,
       endDate: bookingData.endDate,
       days: bookingData.days,
@@ -403,7 +418,7 @@ export default function Rento() {
       id: newBookingId,
       listingId,
       item: targetListing.title,
-      renter: "Aditya R. (You)",
+      renter: "SATYAM (You)",
       dates: `${bookingData.startDate} – ${bookingData.endDate}`,
       status: isInstant ? "Confirmed" : "Pending",
       handoverOwnerConfirmed: false,
@@ -1313,7 +1328,7 @@ function Dashboard({
   const [listingFilter, setListingFilter] = useState("all");
   const toast = useToast();
 
-  const myListings = listings.filter(l => l.ownerId === "user_aditya");
+  const myListings = listings.filter(l => l.ownerId === "user_satyam");
   const pendingCount = listings.filter(l => l.status === "PENDING_APPROVAL").length;
 
   const filteredMyListings = myListings.filter(l => {
@@ -1361,7 +1376,7 @@ function Dashboard({
         {tab === "overview" && (
           <>
             <div className="dash-head-bar">
-              <h1>Welcome back, Aditya</h1>
+              <h1>Welcome back, SATYAM</h1>
               <button className="btn btn-primary btn-sm" onClick={() => onOpenWizard()}>
                 <Plus size={14} /> List an Item
               </button>
