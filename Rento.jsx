@@ -140,6 +140,13 @@ const migrateDefaultUser = (value) => (Array.isArray(value) ? value.map((item) =
   return item;
 }) : value);
 
+const mergeInitialListings = (storedListings) => {
+  const saved = migrateDefaultUser(storedListings);
+  if (!Array.isArray(saved)) return INITIAL_LISTINGS;
+  const savedIds = new Set(saved.map((item) => item.id));
+  return [...saved, ...INITIAL_LISTINGS.filter((item) => !savedIds.has(item.id))];
+};
+
 function useTilt(maxDeg = 6) {
   const ref = useRef(null);
   const [style, setStyle] = useState({});
@@ -225,7 +232,7 @@ export default function Rento() {
   const [route, setRoute] = useState({ page: "home" });
 
   // Persistence in LocalStorage
-  const [listings, setListings] = useState(() => migrateDefaultUser(loadFromStorage("rento_listings_v1", INITIAL_LISTINGS)));
+  const [listings, setListings] = useState(() => mergeInitialListings(loadFromStorage("rento_listings_v1", INITIAL_LISTINGS)));
   const [requests, setRequests] = useState(() => migrateDefaultUser(loadFromStorage("rento_requests_v1", INITIAL_REQUESTS)));
   const [notifications, setNotifications] = useState(() => loadFromStorage("rento_notifs_v1", INITIAL_NOTIFICATIONS));
   const [favorites, setFavorites] = useState(() => new Set(loadFromStorage("rento_favs_v1", [2, 4])));

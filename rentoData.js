@@ -77,6 +77,221 @@ export const REJECTION_REASONS = [
   "Item condition appears damaged or not ready for safe peer rental."
 ];
 
+const ADDITIONAL_LISTINGS = [
+  {
+    id: 13, title: "Canon EOS R6 Mark II Creator Kit", category: "Cameras", price: 1100,
+    location: "Indiranagar, Bengaluru", owner: "Nisha P.", brand: "Canon", model: "EOS R6 Mark II",
+    condition: "Like new", description: "A capable full-frame hybrid camera for portraits, weddings, and polished video projects.",
+    images: [
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Sensor", value: "24.2 MP Full-Frame" }, { key: "Video", value: "4K 60fps" }]
+  },
+  {
+    id: 14, title: "DJI Air 3 Travel Drone Kit", category: "Cameras", price: 1250,
+    location: "Hitech City, Hyderabad", owner: "Karan S.", brand: "DJI", model: "Air 3",
+    condition: "Excellent", description: "Dual-camera drone kit for smooth travel footage, landscapes, and real-estate flyovers.",
+    images: [
+      "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Flight Time", value: "46 minutes" }, { key: "Video", value: "4K 100fps HDR" }]
+  },
+  {
+    id: 15, title: "MacBook Air M3 15-inch", category: "Electronics", price: 750,
+    location: "Viman Nagar, Pune", owner: "Rhea M.", brand: "Apple", model: "MacBook Air M3",
+    condition: "Like new", description: "Lightweight, quiet laptop for presentations, coding, editing, and remote work on the move.",
+    images: [
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Chip", value: "Apple M3" }, { key: "Memory", value: "16 GB RAM" }]
+  },
+  {
+    id: 16, title: "4K LED Projector with Screen", category: "Electronics", price: 650,
+    location: "Bandra West, Mumbai", owner: "Aarav D.", brand: "BenQ", model: "4K Home Cinema",
+    condition: "Excellent", description: "Bright 4K projector with a portable screen for movie nights, sports, and presentations.",
+    images: [
+      "https://images.unsplash.com/photo-1615751072497-5f5169febe17?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Resolution", value: "4K UHD" }, { key: "Brightness", value: "3000 ANSI lumens" }]
+  },
+  {
+    id: 17, title: "Xbox Series X Gaming Bundle", category: "Gaming", price: 600,
+    location: "Kalyan Nagar, Bengaluru", owner: "Dev P.", brand: "Microsoft", model: "Xbox Series X",
+    condition: "Excellent", description: "Console bundle with two controllers and a fast SSD for a weekend gaming setup.",
+    images: [
+      "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1605901309584-818e25960a8f?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Storage", value: "1 TB SSD" }, { key: "Output", value: "4K up to 120fps" }]
+  },
+  {
+    id: 18, title: "Nintendo Switch OLED Party Pack", category: "Gaming", price: 450,
+    location: "Salt Lake, Kolkata", owner: "Tanya R.", brand: "Nintendo", model: "Switch OLED",
+    condition: "Like new", description: "Portable console with extra Joy-Cons and party-ready games for groups and family weekends.",
+    images: [
+      "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Display", value: "7-inch OLED" }, { key: "Controllers", value: "4 Joy-Cons" }]
+  },
+  {
+    id: 19, title: "Royal Enfield Classic 350", category: "Vehicles", price: 900,
+    location: "Vastrapur, Ahmedabad", owner: "Mihir J.", brand: "Royal Enfield", model: "Classic 350",
+    condition: "Good", description: "Well-maintained city and weekend ride with a comfortable touring setup and helmet included.",
+    images: [
+      "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1558981359-219d6364c9c8?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Engine", value: "349 cc" }, { key: "Included", value: "Helmet and disc lock" }]
+  },
+  {
+    id: 20, title: "Mini Cooper Weekend Drive", category: "Vehicles", price: 2800,
+    location: "Worli, Mumbai", owner: "Simran K.", brand: "MINI", model: "Cooper S",
+    condition: "Excellent", description: "A fun, polished city car for weekend plans, shoots, or a special day out.",
+    images: [
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Seats", value: "4" }, { key: "Transmission", value: "Automatic" }]
+  },
+  {
+    id: 21, title: "Giant Escape City Hybrid Bike", category: "Bikes", price: 450,
+    location: "Thane West, Mumbai", owner: "Omkar P.", brand: "Giant", model: "Escape 3",
+    condition: "Excellent", description: "A light hybrid bicycle for city commuting, errands, and relaxed weekend rides.",
+    images: [
+      "https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Frame", value: "Medium aluminum" }, { key: "Gears", value: "21-speed" }]
+  },
+  {
+    id: 22, title: "Bosch Rotary Hammer Drill Set", category: "Tools", price: 350,
+    location: "Wakad, Pune", owner: "Sameer D.", brand: "Bosch", model: "GBH 2-26",
+    condition: "Good", description: "Reliable rotary hammer with bits and case for home repairs, masonry, and renovation work.",
+    images: [
+      "https://images.unsplash.com/photo-1580901368919-7738efb0f87e?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Power", value: "800 W" }, { key: "Included", value: "Bits, case, side handle" }]
+  },
+  {
+    id: 23, title: "DeWalt Cordless Impact Driver", category: "Tools", price: 300,
+    location: "Whitefield, Bengaluru", owner: "Harish N.", brand: "DeWalt", model: "20V MAX",
+    condition: "Like new", description: "Compact cordless driver kit for furniture builds, installations, and workshop projects.",
+    images: [
+      "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Voltage", value: "20V MAX" }, { key: "Included", value: "2 batteries and charger" }]
+  },
+  {
+    id: 24, title: "Decathlon Trekking Backpack Set", category: "Camping", price: 250,
+    location: "Kothrud, Pune", owner: "Megha S.", brand: "Quechua", model: "Forclaz 50L",
+    condition: "Excellent", description: "Comfortable trekking pack with rain cover, trekking poles, and packing cubes.",
+    images: [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1622260614153-03223fb72052?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Capacity", value: "50 liters" }, { key: "Included", value: "Rain cover and poles" }]
+  },
+  {
+    id: 25, title: "Portable Camp Kitchen & Stove", category: "Camping", price: 350,
+    location: "Kondapur, Hyderabad", owner: "Arjun V.", brand: "Coleman", model: "Trail Kitchen",
+    condition: "Good", description: "Compact outdoor cooking setup for campsites, road trips, and long weekend getaways.",
+    images: [
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Fuel", value: "Butane canister" }, { key: "Included", value: "Stove, windscreen, cookware" }]
+  },
+  {
+    id: 26, title: "Fender Stratocaster Electric Guitar", category: "Musical Instruments", price: 550,
+    location: "Indiranagar, Bengaluru", owner: "Kabir M.", brand: "Fender", model: "Player Stratocaster",
+    condition: "Excellent", description: "Versatile electric guitar with amp and pedal for rehearsals, recordings, and live sessions.",
+    images: [
+      "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Pickups", value: "3 single-coil" }, { key: "Included", value: "Practice amp and cable" }]
+  },
+  {
+    id: 27, title: "Yamaha Digital Piano with Stand", category: "Musical Instruments", price: 700,
+    location: "Anna Nagar, Chennai", owner: "Laya V.", brand: "Yamaha", model: "P-125",
+    condition: "Like new", description: "Weighted-key digital piano for lessons, home practice, rehearsals, and intimate performances.",
+    images: [
+      "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1552422535-c45813c61732?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Keys", value: "88 weighted keys" }, { key: "Included", value: "Stand, pedal, headphones" }]
+  },
+  {
+    id: 28, title: "Party PA Speaker and Mic Pair", category: "Event Equipment", price: 850,
+    location: "Powai, Mumbai", owner: "Neha T.", brand: "JBL", model: "EON One Compact Pair",
+    condition: "Excellent", description: "Portable PA speakers with wireless microphones for house parties, talks, and small events.",
+    images: [
+      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Inputs", value: "Bluetooth, XLR, AUX" }, { key: "Included", value: "2 speakers and 2 mics" }]
+  },
+  {
+    id: 29, title: "Warm LED Photo Light Kit", category: "Event Equipment", price: 500,
+    location: "Koramangala, Bengaluru", owner: "Anika R.", brand: "Godox", model: "SL60W Duo Kit",
+    condition: "Like new", description: "Two soft LED lights with stands and modifiers for portraits, product shoots, and events.",
+    images: [
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Output", value: "2 x 60 W LED" }, { key: "Included", value: "Softboxes and stands" }]
+  },
+  {
+    id: 30, title: "Mid-Century Lounge Chair Pair", category: "Furniture", price: 600,
+    location: "Bandra West, Mumbai", owner: "Zara F.", brand: "Urban Ladder", model: "Teak Accent Pair",
+    condition: "Excellent", description: "A styled pair of accent chairs for photo shoots, staging, events, and film sets.",
+    images: [
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Material", value: "Teak and velvet" }, { key: "Quantity", value: "2 chairs" }]
+  },
+  {
+    id: 31, title: "Oak Work Desk with Desk Lamp", category: "Furniture", price: 400,
+    location: "Sector 17, Chandigarh", owner: "Ira B.", brand: "IKEA", model: "Oak Studio Desk",
+    condition: "Good", description: "Clean wooden desk setup for a home office, creative shoot, or temporary workspace.",
+    images: [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Width", value: "120 cm" }, { key: "Included", value: "Desk lamp and cable tray" }]
+  },
+  {
+    id: 32, title: "Design and Photography Book Set", category: "Books", price: 180,
+    location: "Church Street, Bengaluru", owner: "Aditi S.", brand: "Mixed collection", model: "Creative Library Set",
+    condition: "Good", description: "A curated set of design, architecture, and photography books for study, styling, or a reading weekend.",
+    images: [
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Collection", value: "12 hardcover books" }, { key: "Topics", value: "Design, art, photography" }]
+  }
+].map((item, index) => ({
+  ...item,
+  img: item.images[0],
+  weekly: Math.round(item.price * 5.6),
+  monthly: Math.round(item.price * 18),
+  deposit: Math.round(item.price * 6),
+  deliveryFee: 100 + (index % 4) * 50,
+  rating: 4.6 + (index % 5) * 0.1,
+  reviews: 8 + index * 3,
+  views: 180 + index * 47,
+  favoritesCount: 8 + index * 2,
+  rentalCount: 3 + (index % 8),
+  earnings: item.price * (12 + index),
+  area: item.location.split(",")[0],
+  city: item.location.split(",")[1]?.trim() || "Bengaluru",
+  pincode: "560001",
+  ownerId: `user_host_${index + 13}`,
+  includedAccessories: "Protective carry case and essential accessories included.",
+  rules: ["Return in the same clean condition", "Valid government ID required at handover"],
+  minDays: 1,
+  maxDays: 14,
+  pickupAvailable: true,
+  deliveryAvailable: index % 4 !== 0,
+  deliveryRadius: 8 + (index % 4) * 3,
+  pickupInstructions: "Pickup from the host's verified neighborhood meeting point.",
+  approvalMode: index % 3 === 0 ? "instant" : "manual",
+  status: "PUBLISHED",
+  rejectionReason: null,
+  approvalHistory: [{ date: "2026-09-12", action: "APPROVED", by: "Admin" }],
+  blockedDates: [],
+  bookings: [],
+  featured: index < 4
+}));
+
 export const INITIAL_LISTINGS = [
   {
     id: 1,
@@ -749,7 +964,8 @@ export const INITIAL_LISTINGS = [
     blockedDates: [],
     bookings: [],
     featured: false
-  }
+  },
+  ...ADDITIONAL_LISTINGS
 ];
 
 export const INITIAL_NOTIFICATIONS = [
