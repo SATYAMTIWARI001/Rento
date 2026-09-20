@@ -46,8 +46,11 @@ export const CSS = `
 @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* REVEAL ON SCROLL */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s var(--ease), transform .55s var(--ease); }
-.reveal-in { opacity: 1; transform: translateY(0); }
+.reveal { opacity: .38; filter: blur(7px); transform: translateY(18px) scale(.985); transition: opacity .65s var(--ease), transform .65s var(--ease), filter .65s var(--ease); }
+.reveal-in { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-in { filter: none; transform: none; transition: opacity .2s ease; }
+}
 
 /* SMART IMAGE */
 .img-loading { opacity: 0; }
@@ -121,6 +124,18 @@ export const CSS = `
 .section-head h2 { font-size: 28px; font-weight: 500; }
 .link-more { background: none; border: none; color: var(--gold-dim); font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 2px; transition: gap .15s ease; }
 .link-more:hover { gap: 6px; }
+
+/* HOW RENTO WORKS */
+.how { padding-top: 72px; }
+.how .section-head { max-width: 620px; margin-bottom: 30px; }
+.how .section-head h2 { font-size: 34px; }
+.how-grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.how-grid::before { content: ""; position: absolute; top: 38px; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent); opacity: .55; }
+.how-step { position: relative; z-index: 1; min-height: 220px; padding: 30px 24px 24px; background: rgba(255,255,255,.78); border: 1px solid var(--paper-dim); border-radius: 12px; box-shadow: 0 12px 28px rgba(21,20,26,.05); transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s ease; }
+.how-step:hover { transform: translateY(-7px); border-color: rgba(194,149,79,.7); box-shadow: 0 20px 36px rgba(21,20,26,.11); }
+.how-index { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border: 1px solid var(--gold); border-radius: 50%; background: var(--paper); color: var(--gold-dim); font-family: 'Fraunces', serif; font-size: 21px; box-shadow: 0 0 0 7px rgba(194,149,79,.1); }
+.how-step h3 { font-family: 'Fraunces', serif; font-size: 23px; font-weight: 500; margin-bottom: 10px; }
+.how-step p { max-width: 300px; color: #514E5C; font-size: 14px; line-height: 1.65; }
 
 .cat-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
 .cat-chip { flex-shrink: 0; display: flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--paper-dim); padding: 10px 16px; border-radius: 22px; font-size: 13.5px; font-weight: 500; color: var(--ink); transition: border-color .15s ease, color .15s ease, transform .15s ease; }
@@ -491,6 +506,10 @@ export const CSS = `
   .mobile-toggle { display: flex; }
   .footer-inner { flex-direction: column; gap: 32px; }
   .my-listing-actions { align-items: flex-start; }
+  .how-grid { grid-template-columns: 1fr; gap: 14px; }
+  .how-grid::before { top: 38px; bottom: 38px; left: 23px; right: auto; width: 1px; height: auto; background: linear-gradient(180deg, transparent, var(--gold), transparent); }
+  .how-step { min-height: 0; padding: 24px 24px 24px 88px; }
+  .how-index { position: absolute; left: 24px; top: 24px; margin-bottom: 0; }
 }
 @media (max-width: 560px) {
   .hero-title { font-size: 38px; }

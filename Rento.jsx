@@ -81,8 +81,8 @@ function Reveal({ children, className = "", delay = 0 }) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.12 }
+      ([entry]) => { setVisible(entry.isIntersecting); },
+      { threshold: 0.18, rootMargin: "-12% 0px -12% 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
