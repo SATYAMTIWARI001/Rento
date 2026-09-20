@@ -144,7 +144,12 @@ const mergeInitialListings = (storedListings) => {
   const saved = migrateDefaultUser(storedListings);
   if (!Array.isArray(saved)) return INITIAL_LISTINGS;
   const savedIds = new Set(saved.map((item) => item.id));
-  return [...saved, ...INITIAL_LISTINGS.filter((item) => !savedIds.has(item.id))];
+  const refreshed = saved.map((item) => {
+    if (item.id !== 3 && item.id !== 16) return item;
+    const latest = INITIAL_LISTINGS.find((listing) => listing.id === item.id);
+    return latest ? { ...item, img: latest.img, images: latest.images } : item;
+  });
+  return [...refreshed, ...INITIAL_LISTINGS.filter((item) => !savedIds.has(item.id))];
 };
 
 function useTilt(maxDeg = 6) {

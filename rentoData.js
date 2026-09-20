@@ -110,8 +110,8 @@ const ADDITIONAL_LISTINGS = [
     location: "Bandra West, Mumbai", owner: "Aarav D.", brand: "BenQ", model: "4K Home Cinema",
     condition: "Excellent", description: "Bright 4K projector with a portable screen for movie nights, sports, and presentations.",
     images: [
-      "https://images.unsplash.com/photo-1615751072497-5f5169febe17?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1615751072497-5f5169febe17?q=80&w=1200&auto=format&fit=crop"
     ], specifications: [{ key: "Resolution", value: "4K UHD" }, { key: "Brightness", value: "3000 ANSI lumens" }]
   },
   {
@@ -257,12 +257,102 @@ const ADDITIONAL_LISTINGS = [
       "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200&auto=format&fit=crop"
     ], specifications: [{ key: "Collection", value: "12 hardcover books" }, { key: "Topics", value: "Design, art, photography" }]
+  },
+  {
+    id: 33, title: "Single Bed with Mattress", category: "Furniture", price: 100, monthly: 1500,
+    location: "HSR Layout, Bengaluru", owner: "Pooja M.", brand: "Sleepwell", model: "Single Comfort Set",
+    condition: "Excellent", description: "Clean single bed with a comfortable mattress for students, guests, and short-term homes.",
+    images: [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Size", value: "Single 3 x 6.25 ft" }, { key: "Included", value: "Bed frame and mattress" }]
+  },
+  {
+    id: 34, title: "43-inch Smart LED Television", category: "Electronics", price: 400, monthly: 7000,
+    location: "Andheri East, Mumbai", owner: "Ritu S.", brand: "Samsung", model: "Crystal UHD 43",
+    condition: "Like new", description: "Sharp smart TV for a temporary home, guest room, movie night, or sports weekend.",
+    images: [
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1461151304267-38535e780c79?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Display", value: "43-inch 4K UHD" }, { key: "Smart Apps", value: "Netflix, Prime Video, YouTube" }]
+  },
+  {
+    id: 35, title: "Front Load Washing Machine", category: "Electronics", price: 450, monthly: 9000,
+    location: "Whitefield, Bengaluru", owner: "Naveen G.", brand: "LG", model: "7 kg Inverter",
+    condition: "Good", description: "Efficient washing machine for rented homes, family stays, and temporary accommodation.",
+    images: [
+      "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Capacity", value: "7 kg" }, { key: "Type", value: "Front load inverter" }]
+  },
+  {
+    id: 36, title: "Double Door Refrigerator", category: "Electronics", price: 550, monthly: 10000,
+    location: "Baner, Pune", owner: "Shreya K.", brand: "Whirlpool", model: "265L Frost Free",
+    condition: "Excellent", description: "Spacious frost-free refrigerator for a new apartment, event kitchen, or temporary stay.",
+    images: [
+      "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Capacity", value: "265 liters" }, { key: "Cooling", value: "Frost free" }]
+  },
+  {
+    id: 37, title: "Ergonomic Study Chair", category: "Furniture", price: 150, monthly: 2500,
+    location: "Salt Lake, Kolkata", owner: "Ankit D.", brand: "Green Soul", model: "Monster Ultimate",
+    condition: "Good", description: "Adjustable study chair for work-from-home setups, exam preparation, and home offices.",
+    images: [
+      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Support", value: "Adjustable lumbar support" }, { key: "Material", value: "Mesh back and fabric seat" }]
+  },
+  {
+    id: 38, title: "Tower Air Cooler", category: "Electronics", price: 300, monthly: 6500,
+    location: "Madhapur, Hyderabad", owner: "Farah N.", brand: "Symphony", model: "Diet 12T",
+    condition: "Excellent", description: "Compact air cooler for bedrooms, study rooms, and summer stays without a permanent appliance.",
+    images: [
+      "https://images.unsplash.com/photo-1585128792020-803d29415281?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1621460248083-6271cc4437a4?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Tank", value: "12 liters" }, { key: "Coverage", value: "Up to 150 sq ft" }]
+  },
+  {
+    id: 39, title: "Bluetooth Soundbar with Subwoofer", category: "Electronics", price: 250, monthly: 4500,
+    location: "Viman Nagar, Pune", owner: "Yash T.", brand: "Sony", model: "HT-S40R",
+    condition: "Like new", description: "Simple home cinema audio upgrade with wireless subwoofer for a better movie and music setup.",
+    images: [
+      "https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Channels", value: "5.1 channel" }, { key: "Connectivity", value: "Bluetooth, HDMI ARC, optical" }]
+  },
+  {
+    id: 40, title: "Four-Seater Dining Table Set", category: "Furniture", price: 500, monthly: 8000,
+    location: "Powai, Mumbai", owner: "Maya R.", brand: "Urban Ladder", model: "Solid Wood Dining Set",
+    condition: "Good", description: "Warm wood dining table with four chairs for a temporary home, dinner event, or photo styling.",
+    images: [
+      "https://images.unsplash.com/photo-1617806118233-18e1de247200?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Seats", value: "4 people" }, { key: "Material", value: "Solid wood" }]
+  },
+  {
+    id: 41, title: "Home Yoga and Fitness Kit", category: "Sports", price: 180, monthly: 3000,
+    location: "Kharadi, Pune", owner: "Diya P.", brand: "Decathlon", model: "Home Fitness Set",
+    condition: "Excellent", description: "Complete starter kit for yoga, stretching, and light strength training at home.",
+    images: [
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Included", value: "Mat, blocks, bands, dumbbells" }, { key: "Weight", value: "2 x 5 kg dumbbells" }]
+  },
+  {
+    id: 42, title: "Foldable Baby Cot and High Chair", category: "Furniture", price: 220, monthly: 3500,
+    location: "Indiranagar, Bengaluru", owner: "Rohan A.", brand: "R for Rabbit", model: "Travel Baby Set",
+    condition: "Excellent", description: "Clean foldable baby cot and high chair set for visiting families and short-term stays.",
+    images: [
+      "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=1200&auto=format&fit=crop"
+    ], specifications: [{ key: "Included", value: "Travel cot and high chair" }, { key: "Folded Size", value: "Compact car boot fit" }]
   }
 ].map((item, index) => ({
   ...item,
   img: item.images[0],
   weekly: Math.round(item.price * 5.6),
-  monthly: Math.round(item.price * 18),
+  monthly: item.monthly || Math.round(item.price * 18),
   deposit: Math.round(item.price * 6),
   deliveryFee: 100 + (index % 4) * 50,
   rating: 4.6 + (index % 5) * 0.1,
@@ -458,8 +548,9 @@ export const INITIAL_LISTINGS = [
     area: "Baner Road",
     city: "Pune",
     pincode: "411045",
-    img: "https://images.unsplash.com/photo-1615751072497-5f5169febe17?q=80&w=1200&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop",
     images: [
+      "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1615751072497-5f5169febe17?q=80&w=1200&auto=format&fit=crop"
     ],
     owner: "Rohan K.",
