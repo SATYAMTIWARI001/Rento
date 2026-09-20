@@ -116,6 +116,8 @@ export const CSS = `
 .hero-visual { position: relative; }
 .hero-img-main { width: 100%; height: 420px; object-fit: cover; border-radius: 10px; }
 .hero-img-float { position: absolute; width: 42%; aspect-ratio: 4/3; object-fit: cover; bottom: -32px; left: -36px; border-radius: 8px; border: 4px solid var(--paper); box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
+.hero-product-swap { animation: productSwap .55s var(--ease) both; }
+@keyframes productSwap { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .hero-badge { position: absolute; top: 16px; right: 16px; background: rgba(21,20,26,0.85); color: var(--paper); font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
 
 /* SECTIONS */
@@ -137,15 +139,27 @@ export const CSS = `
 .how-step h3 { font-family: 'Fraunces', serif; font-size: 23px; font-weight: 500; margin-bottom: 10px; }
 .how-step p { max-width: 300px; color: #514E5C; font-size: 14px; line-height: 1.65; }
 
+/* COMPACT HOST CTA */
+.earn-wrap { max-width: 1180px; margin: 64px auto 0; padding: 0 24px; }
+.earn { display: grid; grid-template-columns: 1fr .8fr; min-height: 260px; overflow: hidden; border-radius: 12px; background: var(--ink); color: var(--paper); box-shadow: 0 20px 42px rgba(21,20,26,.16); }
+.earn-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 38px 42px; }
+.earn-copy .eyebrow-plain { margin-bottom: 8px; color: var(--gold); }
+.earn-copy h2 { font-size: 32px; font-weight: 500; margin-bottom: 10px; }
+.earn-copy p:not(.eyebrow-plain) { max-width: 400px; color: rgba(246,242,233,.7); font-size: 14px; margin-bottom: 20px; }
+.earn-img { width: 100%; height: 100%; min-height: 260px; object-fit: cover; opacity: .82; }
+
 .cat-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
 .cat-chip { flex-shrink: 0; display: flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--paper-dim); padding: 10px 16px; border-radius: 22px; font-size: 13.5px; font-weight: 500; color: var(--ink); transition: border-color .15s ease, color .15s ease, transform .15s ease; }
 .cat-chip:hover { border-color: var(--gold); color: var(--gold-dim); transform: translateY(-2px); }
+.cat-chip:active, .link-more:active { transform: scale(.96); }
+.rento-root button:focus-visible, .rento-root input:focus-visible, .rento-root select:focus-visible { outline: 3px solid rgba(194,149,79,.38); outline-offset: 3px; }
 
 .grid-featured { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 18px; }
 .grid-explore { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 
 .pcard { background: white; border: 1px solid var(--paper-dim); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease); will-change: transform; }
 .pcard:hover { transform: translateY(-4px); box-shadow: 0 18px 34px rgba(21,20,26,0.10); border-color: transparent; }
+.pcard:active { transform: translateY(-1px) scale(.985); }
 .pcard-lg { grid-row: span 2; }
 .pcard-media { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; background: var(--paper-dim); transform-style: preserve-3d; transition: transform .35s var(--ease); will-change: transform; }
 .pcard-lg .pcard-media { aspect-ratio: auto; height: 62%; }
@@ -510,9 +524,16 @@ export const CSS = `
   .how-grid::before { top: 38px; bottom: 38px; left: 23px; right: auto; width: 1px; height: auto; background: linear-gradient(180deg, transparent, var(--gold), transparent); }
   .how-step { min-height: 0; padding: 24px 24px 24px 88px; }
   .how-index { position: absolute; left: 24px; top: 24px; margin-bottom: 0; }
+  .earn { grid-template-columns: 1fr; }
+  .earn-copy { padding: 30px 24px; }
+  .earn-img { min-height: 180px; max-height: 220px; }
 }
 @media (max-width: 560px) {
   .hero-title { font-size: 38px; }
+  .hero { padding-top: 38px; }
+  .hero-img-main { height: 300px; }
+  .hero-img-float { left: -10px; bottom: -24px; }
+  .earn-wrap { margin-top: 44px; }
   .grid-featured, .grid-explore, .admin-queue-grid, .condition-grid { grid-template-columns: 1fr; }
   .wizard-photo-grid { grid-template-columns: repeat(2, 1fr); }
 }

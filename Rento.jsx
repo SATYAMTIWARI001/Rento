@@ -12,7 +12,7 @@ import {
 
 import {
   CATEGORIES, INITIAL_LISTINGS, INITIAL_NOTIFICATIONS, INITIAL_REQUESTS,
-  EARNINGS_DATA, TESTIMONIALS, money, loadFromStorage, saveToStorage, checkBookingConflict
+  EARNINGS_DATA, money, loadFromStorage, saveToStorage, checkBookingConflict
 } from "./rentoData.js";
 import ListingWizard from "./ListingWizard.jsx";
 import AdminPortal from "./AdminPortal.jsx";
@@ -692,6 +692,16 @@ function Home({ goTo, favorites, toggleFav, listings, onOpenWizard }) {
   // Only published items appear in public marketplace
   const publicListings = listings.filter(l => l.status === "PUBLISHED");
   const featured = publicListings.filter((l) => l.featured).slice(0, 6);
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    if (publicListings.length < 2) return undefined;
+    const interval = setInterval(() => setHeroIndex((index) => index + 1), 2000);
+    return () => clearInterval(interval);
+  }, [publicListings.length]);
+
+  const heroProduct = publicListings[heroIndex % Math.max(publicListings.length, 1)];
+  const floatProduct = publicListings[(heroIndex + 1) % Math.max(publicListings.length, 1)];
 
   return (
     <main>
@@ -723,11 +733,21 @@ function Home({ goTo, favorites, toggleFav, listings, onOpenWizard }) {
           </div>
         </div>
         <div className="hero-visual">
-          <SmartImage src={publicListings[0]?.primaryImage || publicListings[0]?.img} alt="Camera gear" className="hero-img-main" />
-          <SmartImage src={publicListings[3]?.primaryImage || publicListings[3]?.img} alt="Mountain bike" className="hero-img-float" />
+          <SmartImage
+            key={heroProduct?.id || "hero-main"}
+            src={heroProduct?.primaryImage || heroProduct?.img}
+            alt={heroProduct?.title || "Rento rental product"}
+            className="hero-img-main hero-product-swap"
+          />
+          <SmartImage
+            key={floatProduct?.id || "hero-float"}
+            src={floatProduct?.primaryImage || floatProduct?.img}
+            alt={floatProduct?.title || "Featured rental product"}
+            className="hero-img-float hero-product-swap"
+          />
           <div className="hero-badge">
             <ShieldCheck size={16} />
-            <span>Deposit-protected rentals</span>
+            <span>{heroProduct?.category || "Verified rentals"}</span>
           </div>
         </div>
       </section>
@@ -768,46 +788,15 @@ function Home({ goTo, favorites, toggleFav, listings, onOpenWizard }) {
         </div>
       </Reveal>
 
-      {/* HOW IT WORKS */}
-      <Reveal className="section how">
-        <div className="section-head">
-          <h2>How Rento works</h2>
-        </div>
-        <div className="how-grid">
-          <div className="how-step">
-            <span className="how-index">1</span>
-            <h3>Find it</h3>
-            <p>Search or browse gear nearby. Filter by date, city, price, and check real-time availability calendar.</p>
-          </div>
-          <div className="how-step">
-            <span className="how-index">2</span>
-            <h3>Book with Deposit Protection</h3>
-            <p>Pick your rental dates. See the transparent cost upfront including refundable deposit, and request to rent.</p>
-          </div>
-          <div className="how-step">
-            <span className="how-index">3</span>
-            <h3>Handover &amp; Return</h3>
-            <p>Self pickup or local delivery. Sign off on condition at handover, enjoy the gear, and return for full deposit refund.</p>
-          </div>
-        </div>
-      </Reveal>
-
-      {/* EARN / LIST AN ITEM CTA */}
+      {/* LISTING CTA */}
       <Reveal className="earn-wrap">
         <div className="earn">
           <div className="earn-copy">
-            <h2>Earn from what you already own</h2>
-            <p>
-              List anything sitting idle — cameras, drones, projectors, power tools — and set your own price,
-              blackout dates, and rules. You approve every request before it is confirmed.
-            </p>
-            <ul className="earn-list">
-              <li><Check size={16} /> Set your own daily, weekly, or monthly rates</li>
-              <li><Check size={16} /> 100% refundable deposit protection on every rental</li>
-              <li><Check size={16} /> Fast host payouts directly to your bank</li>
-            </ul>
+            <p className="eyebrow-plain">For hosts</p>
+            <h2>Put unused gear to work.</h2>
+            <p>Set your price, choose available dates, and approve the requests you want.</p>
             <button className="btn btn-primary" onClick={onOpenWizard}>
-              <Plus size={16} /> List Your Item Now <ArrowUpRight size={15} />
+              <Plus size={16} /> List an item <ArrowUpRight size={15} />
             </button>
           </div>
           <SmartImage
@@ -815,32 +804,6 @@ function Home({ goTo, favorites, toggleFav, listings, onOpenWizard }) {
             src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=900&auto=format&fit=crop"
             alt="Audio gear ready to be listed"
           />
-        </div>
-      </Reveal>
-
-      {/* TESTIMONIALS */}
-      <Reveal className="section">
-        <div className="section-head"><h2>From the community</h2></div>
-        <div className="testimonial-row">
-          {TESTIMONIALS.map((t) => (
-            <div className="testimonial" key={t.name}>
-              <p>&ldquo;{t.quote}&rdquo;</p>
-              <div className="testimonial-who"><strong>{t.name}</strong><span>{t.role}</span></div>
-            </div>
-          ))}
-        </div>
-      </Reveal>
-
-      {/* FINAL CTA */}
-      <Reveal className="cta-final">
-        <h2>Turn idle items into passive income today.</h2>
-        <div className="cta-final-actions">
-          <button className="btn btn-primary" onClick={onOpenWizard}>
-            <Plus size={16} /> List Your Item for Rent
-          </button>
-          <button className="btn btn-ghost-dark" onClick={() => goTo("explore")}>
-            Browse Marketplace
-          </button>
         </div>
       </Reveal>
     </main>
