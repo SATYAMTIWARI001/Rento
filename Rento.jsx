@@ -693,15 +693,49 @@ function Home({ goTo, favorites, toggleFav, listings, onOpenWizard }) {
   const publicListings = listings.filter(l => l.status === "PUBLISHED");
   const featured = publicListings.filter((l) => l.featured).slice(0, 6);
   const [heroIndex, setHeroIndex] = useState(0);
+  const [heroDirection, setHeroDirection] = useState("next");
+  const [heroNavigating, setHeroNavigating] = useState(false);
+  const heroTouchStart = useRef(0);
+  const heroIsSwiping = useRef(false);
+
+  const advanceHero = (direction = 1) => {
+    setHeroDirection(direction > 0 ? "next" : "previous");
+    setHeroIndex((index) => index + direction);
+  };
 
   useEffect(() => {
     if (publicListings.length < 2) return undefined;
-    const interval = setInterval(() => setHeroIndex((index) => index + 1), 2000);
+    const interval = setInterval(() => advanceHero(1), 4800);
     return () => clearInterval(interval);
   }, [publicListings.length]);
 
-  const heroProduct = publicListings[heroIndex % Math.max(publicListings.length, 1)];
-  const floatProduct = publicListings[(heroIndex + 1) % Math.max(publicListings.length, 1)];
+  const heroCount = Math.max(publicListings.length, 1);
+  const heroPosition = ((heroIndex % heroCount) + heroCount) % heroCount;
+  const heroProduct = publicListings[heroPosition];
+  const floatProduct = publicListings[(heroPosition + 1) % heroCount];
+
+  const openHeroProduct = (product) => {
+    if (!product || heroIsSwiping.current) return;
+    setHeroNavigating(true);
+    window.setTimeout(() => goTo("product", { id: product.id }), 520);
+  };
+
+  const handleHeroTouchStart = (event) => {
+    const touch = event.changedTouches?.[0];
+    if (!touch) return;
+    heroTouchStart.current = touch.clientX;
+    heroIsSwiping.current = false;
+  };
+
+  const handleHeroTouchEnd = (event) => {
+    const touch = event.changedTouches?.[0];
+    if (!touch) return;
+    const distance = touch.clientX - heroTouchStart.current;
+    if (Math.abs(distance) < 48) return;
+    heroIsSwiping.current = true;
+    advanceHero(distance < 0 ? 1 : -1);
+    window.setTimeout(() => { heroIsSwiping.current = false; }, 650);
+  };
 
   return (
     <main>
@@ -732,22 +766,55 @@ function Home({ goTo, favorites, toggleFav, listings, onOpenWizard }) {
             <div><strong>4.9 / 5</strong><span>average host rating</span></div>
           </div>
         </div>
-        <div className="hero-visual">
-          <SmartImage
-            key={heroProduct?.id || "hero-main"}
-            src={heroProduct?.primaryImage || heroProduct?.img}
-            alt={heroProduct?.title || "Rento rental product"}
-            className="hero-img-main hero-product-swap"
-          />
-          <SmartImage
-            key={floatProduct?.id || "hero-float"}
-            src={floatProduct?.primaryImage || floatProduct?.img}
-            alt={floatProduct?.title || "Featured rental product"}
-            className="hero-img-float hero-product-swap"
-          />
+        <div
+          className={"hero-visual" + (heroNavigating ? " hero-zooming" : "")}
+          onTouchStart={handleHeroTouchStart}
+          onTouchEnd={handleHeroTouchEnd}
+        >
+          <button
+            type="button"
+            className="hero-product-button hero-product-main"
+            aria-label={`Open ${heroProduct?.title || "featured rental"}`}
+            onClick={() => openHeroProduct(heroProduct)}
+          >
+            <SmartImage
+              key={heroProduct?.id || "hero-main"}
+              src={heroProduct?.primaryImage || heroProduct?.img}
+              alt={heroProduct?.title || "Rento rental product"}
+              className={`hero-img-main hero-product-swap hero-direction-${heroDirection}`}
+            />
+          </button>
+          <button
+            type="button"
+            className="hero-product-button hero-product-float"
+            aria-label={`Open ${floatProduct?.title || "featured rental"}`}
+            onClick={() => openHeroProduct(floatProduct)}
+          >
+            <SmartImage
+              key={floatProduct?.id || "hero-float"}
+              src={floatProduct?.primaryImage || floatProduct?.img}
+              alt={floatProduct?.title || "Featured rental product"}
+              className={`hero-img-float hero-product-swap hero-direction-${heroDirection}`}
+            />
+          </button>
           <div className="hero-badge">
             <ShieldCheck size={16} />
             <span>{heroProduct?.category || "Verified rentals"}</span>
+          </div>
+          <div className="hero-product-caption" aria-live="polite">
+            <strong>{heroProduct?.title || "Featured rental"}</strong>
+            <span>{heroProduct ? money(heroProduct.price) + " / day" : ""}</span>
+          </div>
+          <div className="hero-dots" aria-label="Featured products">
+            {publicListings.slice(0, Math.min(publicListings.length, 5)).map((product, index) => (
+              <button
+                key={product.id}
+                type="button"
+                className={"hero-dot" + (heroProduct?.id === product.id ? " hero-dot-active" : "")}
+                aria-label={`Show ${product.title}`}
+                onClick={() => { setHeroDirection(index >= heroPosition ? "next" : "previous"); setHeroIndex(index); }}
+              />
+            ))}
           </div>
         </div>
       </section>

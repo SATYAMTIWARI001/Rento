@@ -113,12 +113,29 @@ export const CSS = `
 .hero-stats div { display: flex; flex-direction: column; }
 .hero-stats strong { font-family: 'Fraunces', serif; font-size: 20px; }
 .hero-stats span { font-size: 12px; color: var(--muted); margin-top: 2px; }
-.hero-visual { position: relative; }
+.hero-visual { position: relative; touch-action: pan-y; }
+.hero-product-button { display: block; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; }
+.hero-product-main { width: 100%; }
+.hero-product-float { position: absolute; z-index: 2; width: 42%; bottom: -32px; left: -36px; }
+.hero-product-button:focus-visible { outline: 3px solid rgba(194,149,79,.55); outline-offset: 6px; border-radius: 10px; }
 .hero-img-main { width: 100%; height: 420px; object-fit: cover; border-radius: 10px; }
-.hero-img-float { position: absolute; width: 42%; aspect-ratio: 4/3; object-fit: cover; bottom: -32px; left: -36px; border-radius: 8px; border: 4px solid var(--paper); box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
-.hero-product-swap { animation: productSwap .55s var(--ease) both; }
-@keyframes productSwap { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.hero-img-float { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 4px solid var(--paper); box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
+.hero-product-swap { animation-duration: 1.1s; animation-timing-function: var(--ease); animation-fill-mode: both; }
+.hero-direction-next { animation-name: productSlideNext; }
+.hero-direction-previous { animation-name: productSlidePrevious; }
+@keyframes productSlideNext { from { opacity: 0; transform: translateX(34px) scale(.96); } to { opacity: 1; transform: translateX(0) scale(1); } }
+@keyframes productSlidePrevious { from { opacity: 0; transform: translateX(-34px) scale(.96); } to { opacity: 1; transform: translateX(0) scale(1); } }
+.hero-zooming .hero-product-main { animation: heroZoomForward .52s var(--ease) both; }
+.hero-zooming .hero-product-float { opacity: 0; transition: opacity .25s ease; }
+@keyframes heroZoomForward { to { transform: scale(1.12); opacity: 0; } }
 .hero-badge { position: absolute; top: 16px; right: 16px; background: rgba(21,20,26,0.85); color: var(--paper); font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
+.hero-product-caption { position: absolute; left: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 4px; max-width: 62%; padding: 10px 13px; border-left: 2px solid var(--gold); background: rgba(21,20,26,.78); color: var(--paper); pointer-events: none; }
+.hero-product-caption strong { font-size: 14px; line-height: 1.25; }
+.hero-product-caption span { color: var(--gold); font-size: 12px; font-weight: 600; }
+.hero-dots { position: absolute; right: 18px; bottom: 18px; display: flex; gap: 6px; align-items: center; }
+.hero-dot { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: rgba(246,242,233,.52); transition: transform .25s var(--ease), background .25s ease; }
+.hero-dot:hover { background: var(--paper); }
+.hero-dot-active { background: var(--gold); transform: scale(1.45); }
 
 /* SECTIONS */
 .section { max-width: 1180px; margin: 0 auto; padding: 56px 24px 0; }
@@ -532,7 +549,9 @@ export const CSS = `
   .hero-title { font-size: 38px; }
   .hero { padding-top: 38px; }
   .hero-img-main { height: 300px; }
-  .hero-img-float { left: -10px; bottom: -24px; }
+  .hero-product-float { left: -10px; bottom: -24px; }
+  .hero-product-caption { left: 12px; bottom: 12px; max-width: 70%; }
+  .hero-dots { right: 12px; bottom: 12px; }
   .earn-wrap { margin-top: 44px; }
   .grid-featured, .grid-explore, .admin-queue-grid, .condition-grid { grid-template-columns: 1fr; }
   .wizard-photo-grid { grid-template-columns: repeat(2, 1fr); }
